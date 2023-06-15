@@ -17,24 +17,27 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   // question prompt flow
   let pwLengthChoice = window.prompt("How many characters? (Min = 8, Max = 128)");
-    // verify if the input is valid by checking if it is a number. if not a number, then restart question prompts
-    if (isNaN(pwLengthChoice)) {
+    // verify if the input is valid by checking if it is a number. if not a number, then prompt again
+    while (isNaN(pwLengthChoice)) {
       window.alert("Invalid entry: your input must be a number.");
-      generatePassword();
+      pwLengthChoice = window.prompt("How many characters? (Min = 8, Max = 128)");
     }
-    // verify the password length is within the specified range. if not in range, then restart question prompts
-    if (pwLengthChoice < 8 || pwLengthChoice > 128) {
+    // verify the password length is within the specified range. if not in range, then prompt again
+    while (pwLengthChoice < 8 || pwLengthChoice > 128) {
       window.alert("Invalid entry: your password must be between 8 and 128 characters long.");
-      generatePassword();
+      pwLengthChoice = window.prompt("How many characters? (Min = 8, Max = 128)");
     }
   let pwIncludeLowercase = window.confirm("Do you want to include lowercase letters?");
   let pwIncludeUppercase = window.confirm("Do you want to include UPPERCASE letters?");
   let pwIncludeNumeric = window.confirm("Do you want to include numeric characters?");
   let pwIncludeSpecial = window.confirm("Do you want to include special characters?");
-    // verify the user has chosen at least one character set to generate their password. if they have not, then restart question prompts
-    if ((!pwIncludeLowercase) && (!pwIncludeUppercase) && (!pwIncludeNumeric) && (!pwIncludeSpecial)) {
+    // verify the user has chosen at least one character set to generate their password. if they have not, then prompt again
+    while ((!pwIncludeLowercase) && (!pwIncludeUppercase) && (!pwIncludeNumeric) && (!pwIncludeSpecial)) {
       window.alert("You must choose at least one character type (lowercase, UPPERCASE, numeric, or special).");
-      generatePassword();
+      pwIncludeLowercase = window.confirm("Do you want to include lowercase letters?");
+      pwIncludeUppercase = window.confirm("Do you want to include UPPERCASE letters?");
+      pwIncludeNumeric = window.confirm("Do you want to include numeric characters?");
+      pwIncludeSpecial = window.confirm("Do you want to include special characters?");
     }
 
   // define potential character sets
